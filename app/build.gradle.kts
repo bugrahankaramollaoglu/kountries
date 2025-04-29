@@ -43,6 +43,17 @@ android {
 
 dependencies {
 
+    val lifeCycleExtensionVersion = "1.1.1"
+    val supportVersion = "28.0.0"
+    val retrofitVersion = "2.3.0"
+    val glideVersion = "4.9.0"
+    val rxJavaVersion = "2.1.1"
+    val roomVersion = "2.2.3"
+    val navVersion = "2.2.1"
+    val preferencesVersion = "1.1.0"
+
+
+
 
     /*   **  */
 
