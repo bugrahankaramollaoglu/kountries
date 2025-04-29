@@ -19,6 +19,7 @@ preferencesVersion = "1.1.0"
 retrofitVersion = "2.3.0"
 roomVersion = "2.2.3"
 rxJavaVersion = "2.1.1"
+swiperefreshlayout = "1.1.0"
 
 [libraries]
 adapter-rxjava2 = { module = "com.squareup.retrofit2:adapter-rxjava2", version.ref = "retrofitVersion" }
@@ -50,6 +51,7 @@ androidx-constraintlayout = { group = "androidx.constraintlayout", name = "const
 retrofit = { module = "com.squareup.retrofit2:retrofit", version.ref = "retrofitVersion" }
 rxandroid = { module = "io.reactivex.rxjava2:rxandroid", version.ref = "rxJavaVersion" }
 rxjava = { module = "io.reactivex.rxjava2:rxjava", version.ref = "rxJavaVersion" }
+androidx-swiperefreshlayout = { group = "androidx.swiperefreshlayout", name = "swiperefreshlayout", version.ref = "swiperefreshlayout" }
 
 [plugins]
 android-application = { id = "com.android.application", version.ref = "agp" }

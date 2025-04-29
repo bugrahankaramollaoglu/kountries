@@ -53,6 +53,7 @@ android {
 }
 
 dependencies {
+    implementation(libs.androidx.swiperefreshlayout)
     dependencies {
         val retrofitVersion = "2.9.0" // Updated to latest stable version
 
