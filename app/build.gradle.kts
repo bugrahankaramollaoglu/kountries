@@ -14,6 +14,10 @@ android {
     namespace = "com.bugrahankaramollaoglu.countries"
     compileSdk = 35
 
+    buildFeatures {
+        viewBinding = true
+    }
+
     defaultConfig {
         applicationId = "com.bugrahankaramollaoglu.countries"
         minSdk = 24
@@ -22,6 +26,10 @@ android {
         versionName = "1.0"
 
         testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
+    }
+
+    dataBinding{
+        enable = true
     }
 
     buildTypes {
