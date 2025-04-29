@@ -7,6 +7,7 @@ plugins {
     alias(libs.plugins.kotlin.android)
     kotlin("plugin.serialization") version "2.0.21"
     id("androidx.navigation.safeargs")
+    kotlin("kapt")
 }
 
 android {
@@ -32,56 +33,87 @@ android {
             )
         }
     }
+
     compileOptions {
         sourceCompatibility = JavaVersion.VERSION_11
         targetCompatibility = JavaVersion.VERSION_11
     }
+
     kotlinOptions {
         jvmTarget = "11"
     }
 }
 
 dependencies {
+    dependencies {
+        val retrofitVersion = "2.9.0" // Updated to latest stable version
 
-    val lifeCycleExtensionVersion = "1.1.1"
-    val supportVersion = "28.0.0"
-    val retrofitVersion = "2.3.0"
-    val glideVersion = "4.9.0"
-    val rxJavaVersion = "2.1.1"
-    val roomVersion = "2.2.3"
-    val navVersion = "2.2.1"
-    val preferencesVersion = "1.1.0"
+        // AndroidX Core
+        implementation(libs.androidx.core.ktx)
+        implementation(libs.androidx.appcompat)
+        implementation(libs.androidx.activity)
+        implementation(libs.androidx.constraintlayout)
+        implementation(libs.material)
 
+        // Lifecycle
+        implementation(libs.androidx.lifecycle.extensions)
+        implementation(libs.androidx.lifecycle.livedata.ktx)
+        implementation(libs.androidx.lifecycle.viewmodel.ktx)
 
+        // Room
+        implementation(libs.androidx.room.runtime)
+        implementation(libs.androidx.room.ktx)
+        kapt(libs.androidx.room.compiler)
 
+        // Coroutines
+        implementation(libs.kotlinx.coroutines.core)
 
-    /*   **  */
+        // Navigation
+        implementation(libs.androidx.navigation.fragment.ktx)
+        implementation(libs.androidx.navigation.ui.ktx)
+        // Remove duplicate navigation dependencies
+        // implementation(libs.androidx.navigation.compose)
+        // implementation(libs.androidx.navigation.fragment)
+        // implementation(libs.androidx.navigation.ui)
+        // implementation(libs.androidx.navigation.dynamic.features.fragment)
+        androidTestImplementation(libs.androidx.navigation.testing)
 
-    val nav_version = "2.8.9"
+        // JSON Serialization
+        implementation(libs.kotlinx.serialization.json)
 
-    // Jetpack Compose integration
-    implementation("androidx.navigation:navigation-compose:$nav_version")
+        // Retrofit - updated to 2.9.0
+        implementation(libs.retrofit) {
+            exclude(group = "com.squareup.okhttp3", module = "okhttp")
+        }
+        implementation("com.squareup.retrofit2:converter-gson:$retrofitVersion") {
+            exclude(group = "com.google.code.gson", module = "gson")
+        }
+        implementation(libs.adapter.rxjava2) {
+            exclude(group = "io.reactivex.rxjava2", module = "rxjava")
+        }
 
-    // Views/Fragments integration
-    implementation("androidx.navigation:navigation-fragment:$nav_version")
-    implementation("androidx.navigation:navigation-ui:$nav_version")
+        // RxJava
+        implementation(libs.rxjava)
+        implementation(libs.rxandroid)
 
-    // Feature module support for Fragments
-    implementation("androidx.navigation:navigation-dynamic-features-fragment:$nav_version")
+        // Glide
+        implementation(libs.glide)
 
-    // Testing Navigation
-    androidTestImplementation("androidx.navigation:navigation-testing:$nav_version")
+        // Preferences
+        implementation(libs.androidx.preference.ktx)
 
-    // JSON serialization library, works with the Kotlin serialization plugin
-    implementation("org.jetbrains.kotlinx:kotlinx-serialization-json:1.7.3")
+        // Testing
+        testImplementation(libs.junit)
+        androidTestImplementation(libs.androidx.junit)
+        androidTestImplementation(libs.androidx.espresso.core)
 
-
-    implementation(libs.androidx.core.ktx)
-    implementation(libs.androidx.appcompat)
-    implementation(libs.material)
-    implementation(libs.androidx.activity)
-    implementation(libs.androidx.constraintlayout)
-    testImplementation(libs.junit)
-    androidTestImplementation(libs.androidx.junit)
-    androidTestImplementation(libs.androidx.espresso.core)
+        // Add this to help with dependency conflicts
+        configurations.all {
+            resolutionStrategy {
+                force("androidx.core:core-ktx:1.16.0")
+                // Exclude support-compat if it's being pulled in by another dependency
+                exclude(group = "com.android.support", module = "support-compat")
+            }
+        }
+    }
 }
