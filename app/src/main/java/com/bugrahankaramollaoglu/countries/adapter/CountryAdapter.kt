@@ -17,7 +17,9 @@ class CountryAdapter(val countryList: ArrayList<Country>) :
     }
 
     override fun onBindViewHolder(holder: CountryViewHolder, position: Int) {
-        holder.binding.countryRegionText.text = countryList[position].countryRegion
+        val country = countryList[position]
+        holder.binding.countryNameText.text = country.countryName
+        holder.binding.countryRegionText.text = country.countryRegion
     }
 
     override fun getItemCount(): Int {
