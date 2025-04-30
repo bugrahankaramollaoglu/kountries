@@ -29,7 +29,7 @@ android {
         testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
     }
 
-    dataBinding{
+    dataBinding {
         enable = true
     }
 
@@ -109,7 +109,8 @@ dependencies {
         implementation(libs.rxandroid)
 
         // Glide
-        implementation(libs.glide)
+//        implementation(libs.glide)
+        implementation("com.github.bumptech.glide:glide:4.16.0")
 
         // Preferences
         implementation(libs.androidx.preference.ktx)

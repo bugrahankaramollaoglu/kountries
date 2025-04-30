@@ -43,7 +43,6 @@ class FeedFragment : Fragment() {
 
         observeLiveData()
 
-
     }
 
     private fun observeLiveData() {
