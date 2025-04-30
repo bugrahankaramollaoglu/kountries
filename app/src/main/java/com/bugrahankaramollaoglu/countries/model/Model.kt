@@ -12,13 +12,12 @@ package com.bugrahankaramollaoglu.countries.model
 * */
 
 data class Country(
-    val countryName: String?,
-    val countryRegion: String?,
-    val countryCapital: String?,
-    val countryCurrency: String?,
-    val countryLanguage: String?,
-    val imageUrl: String?
-
+    var countryName: String?,
+    var countryRegion: String?,
+    var countryCapital: String?,
+    var countryCurrency: String?,
+    var countryLanguage: String?,
+    var imageUrl: String?
 ) {
 
 }
