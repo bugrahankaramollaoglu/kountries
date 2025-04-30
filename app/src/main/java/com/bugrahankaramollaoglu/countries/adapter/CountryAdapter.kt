@@ -31,8 +31,6 @@ class CountryAdapter(val countryList: ArrayList<Country>) :
 //            Navigation.findNavController(it).navigate(action)
             it.findNavController().navigate(action)
         }
-
-
     }
 
     override fun getItemCount(): Int {
