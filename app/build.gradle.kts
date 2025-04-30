@@ -91,6 +91,8 @@ dependencies {
         // JSON Serialization
         implementation(libs.kotlinx.serialization.json)
 
+        implementation("com.google.code.gson:gson:2.10.1")
+
         // Retrofit - updated to 2.9.0
         implementation(libs.retrofit) {
             exclude(group = "com.squareup.okhttp3", module = "okhttp")
