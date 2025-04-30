@@ -1,44 +1,35 @@
 package com.bugrahankaramollaoglu.countries.adapter
 
 import android.view.LayoutInflater
-import android.view.View
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
-import com.bugrahankaramollaoglu.countries.R
 import com.bugrahankaramollaoglu.countries.adapter.CountryAdapter.CountryViewHolder
+import com.bugrahankaramollaoglu.countries.databinding.KountryItemBinding
 import com.bugrahankaramollaoglu.countries.model.Country
 
 class CountryAdapter(val countryList: ArrayList<Country>) :
     RecyclerView.Adapter<CountryViewHolder>() {
 
-    override fun onCreateViewHolder(
-        parent: ViewGroup,
-        viewType: Int
-    ): CountryViewHolder {
-
+    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): CountryViewHolder {
         val inflater = LayoutInflater.from(parent.context)
-        val view = inflater.inflate(R.layout.kountry_item, parent, false)
-        return CountryViewHolder(view)
-
+        val binding = KountryItemBinding.inflate(inflater, parent, false)
+        return CountryViewHolder(binding)
     }
 
-    override fun onBindViewHolder(
-        holder: CountryViewHolder,
-        position: Int
-    ) {
-
-        holder.view.countryNameText = countryList[position].countryName
-
-
+    override fun onBindViewHolder(holder: CountryViewHolder, position: Int) {
+        holder.binding.countryRegionText.text = countryList[position].countryRegion
     }
 
     override fun getItemCount(): Int {
         return countryList.size
     }
 
-    class CountryViewHolder(var view: View) : RecyclerView.ViewHolder(view) {
+    class CountryViewHolder(val binding: KountryItemBinding) : RecyclerView.ViewHolder(binding.root)
 
+    fun updateCountryList(newCountrylist: List<Country>) {
+        countryList.clear()
+        countryList.addAll(newCountrylist)
+        notifyDataSetChanged()
     }
-
 
 }
