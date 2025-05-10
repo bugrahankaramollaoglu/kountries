@@ -7,7 +7,9 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.Observer
+import androidx.lifecycle.ViewModelProviders
 import com.bugrahankaramollaoglu.countries.R
+import com.bugrahankaramollaoglu.countries.databinding.FragmentCountryBinding
 import com.bugrahankaramollaoglu.countries.viewmodel.CountryViewModel
 import com.bugrahankaramollaoglu.countries.viewmodel.FeedViewModel
 import kotlin.getValue
@@ -15,8 +17,8 @@ import kotlin.getValue
 
 class CountryFragment : Fragment() {
 
+    private lateinit var viewModel: CountryViewModel
     private var countryUuid = 0
-    private val viewModel: CountryViewModel by viewModels()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -34,12 +36,15 @@ class CountryFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-
-        viewModel.getDataFromRoom()
-
         arguments?.let {
             countryUuid = CountryFragmentArgs.fromBundle(it).countryUuid
         }
+
+        viewModel = ViewModelProviders.of(this).get(CountryViewModel::class.java)
+        viewModel.getDataFromRoom(countryUuid)
+
+
+
 
         observeLiveData()
     }
@@ -51,8 +56,9 @@ class CountryFragment : Fragment() {
                 it.countryName = country.countryName
                 it.countryRegion = country.countryRegion
                 it.countryCapital = country.countryCapital
-                it.countryCurrency = country.countryCurrency
                 it.countryLanguage = country.countryLanguage
+                it.countryCurrency = country.countryCurrency
+
             }
 
         })

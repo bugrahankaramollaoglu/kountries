@@ -55,78 +55,85 @@ android {
 
 dependencies {
     implementation(libs.androidx.swiperefreshlayout)
-    dependencies {
-        val retrofitVersion = "2.9.0" // Updated to latest stable version
 
-        // AndroidX Core
-        implementation(libs.androidx.core.ktx)
-        implementation(libs.androidx.appcompat)
-        implementation(libs.androidx.activity)
-        implementation(libs.androidx.constraintlayout)
-        implementation(libs.material)
+    val retrofitVersion = "2.9.0" // Updated to latest stable version
 
-        // Lifecycle
-        implementation(libs.androidx.lifecycle.extensions)
-        implementation(libs.androidx.lifecycle.livedata.ktx)
-        implementation(libs.androidx.lifecycle.viewmodel.ktx)
+    val room_version = "2.7.1"
 
-        // Room
-        implementation(libs.androidx.room.runtime)
-        implementation(libs.androidx.room.ktx)
-        kapt(libs.androidx.room.compiler)
+    implementation("androidx.room:room-runtime:$room_version")
+    implementation("androidx.room:room-rxjava2:$room_version")
+    implementation("androidx.room:room-ktx:$room_version")
 
-        // Coroutines
-        implementation(libs.kotlinx.coroutines.core)
+    kapt("androidx.room:room-compiler:$room_version")
 
-        // Navigation
-        implementation(libs.androidx.navigation.fragment.ktx)
-        implementation(libs.androidx.navigation.ui.ktx)
-        // Remove duplicate navigation dependencies
-        // implementation(libs.androidx.navigation.compose)
-        // implementation(libs.androidx.navigation.fragment)
-        // implementation(libs.androidx.navigation.ui)
-        // implementation(libs.androidx.navigation.dynamic.features.fragment)
-        androidTestImplementation(libs.androidx.navigation.testing)
+    // AndroidX Core
+    implementation(libs.androidx.core.ktx)
+    implementation(libs.androidx.appcompat)
+    implementation(libs.androidx.activity)
+    implementation(libs.androidx.constraintlayout)
+    implementation(libs.material)
 
-        // JSON Serialization
-        implementation(libs.kotlinx.serialization.json)
+    // Lifecycle
+    implementation(libs.androidx.lifecycle.extensions)
+    implementation(libs.androidx.lifecycle.livedata.ktx)
+    implementation(libs.androidx.lifecycle.viewmodel.ktx)
 
-        implementation("com.google.code.gson:gson:2.10.1")
+    // Coroutines
+    implementation(libs.kotlinx.coroutines.core)
 
-        // Retrofit - updated to 2.9.0
-        implementation(libs.retrofit) {
-            exclude(group = "com.squareup.okhttp3", module = "okhttp")
-        }
-        implementation("com.squareup.retrofit2:converter-gson:$retrofitVersion") {
-            exclude(group = "com.google.code.gson", module = "gson")
-        }
-        implementation(libs.adapter.rxjava2) {
-            exclude(group = "io.reactivex.rxjava2", module = "rxjava")
-        }
+    // Navigation
+    implementation(libs.androidx.navigation.fragment.ktx)
+    implementation(libs.androidx.navigation.ui.ktx)
+    // Remove duplicate navigation dependencies
+    // implementation(libs.androidx.navigation.compose)
+    // implementation(libs.androidx.navigation.fragment)
+    // implementation(libs.androidx.navigation.ui)
+    // implementation(libs.androidx.navigation.dynamic.features.fragment)
+    androidTestImplementation(libs.androidx.navigation.testing)
 
-        // RxJava
-        implementation(libs.rxjava)
-        implementation(libs.rxandroid)
+    // JSON Serialization
+    implementation(libs.kotlinx.serialization.json)
 
-        // Glide
-//        implementation(libs.glide)
-        implementation("com.github.bumptech.glide:glide:4.16.0")
+    implementation("com.google.code.gson:gson:2.10.1")
 
-        // Preferences
-        implementation(libs.androidx.preference.ktx)
+    // Retrofit - updated to 2.9.0
+    implementation(libs.retrofit) {
+        exclude(group = "com.squareup.okhttp3", module = "okhttp")
+    }
 
-        // Testing
-        testImplementation(libs.junit)
-        androidTestImplementation(libs.androidx.junit)
-        androidTestImplementation(libs.androidx.espresso.core)
+    implementation("com.squareup.retrofit2:converter-gson:$retrofitVersion") {
+        exclude(group = "com.google.code.gson", module = "gson")
+    }
 
-        // Add this to help with dependency conflicts
-        configurations.all {
-            resolutionStrategy {
-                force("androidx.core:core-ktx:1.16.0")
-                // Exclude support-compat if it's being pulled in by another dependency
-                exclude(group = "com.android.support", module = "support-compat")
-            }
+    implementation(libs.adapter.rxjava2) {
+        exclude(group = "io.reactivex.rxjava2", module = "rxjava")
+    }
+
+    // RxJava
+    implementation(libs.rxjava)
+    implementation(libs.rxandroid)
+
+    // Glide
+    implementation("com.github.bumptech.glide:glide:4.16.0")
+
+    // Preferences
+    implementation(libs.androidx.preference.ktx)
+
+    // Testing
+    testImplementation(libs.junit)
+    androidTestImplementation(libs.androidx.junit)
+    androidTestImplementation(libs.androidx.espresso.core)
+
+    // Add this to help with dependency conflicts
+    configurations.all {
+        resolutionStrategy {
+            force("androidx.core:core-ktx:1.16.0")
+            // Exclude support-compat if it's being pulled in by another dependency
+            exclude(group = "com.android.support", module = "support-compat")
         }
     }
+}
+
+kapt {
+    correctErrorTypes = true
 }
