@@ -27,8 +27,8 @@ class CountryAdapter(val countryList: ArrayList<Country>) :
         holder.binding.countryRegionText.text = country.countryRegion
 
         holder.itemView.setOnClickListener {
-            Log.d("CountryAdapter", "Clicked: $country with ${country.countryName}")
             val action = FeedFragmentDirections.actionFeedFragmentToCountryFragment()
+            action.countryUuid = countryList[position].uuid
             it.findNavController().navigate(action)
         }
 
