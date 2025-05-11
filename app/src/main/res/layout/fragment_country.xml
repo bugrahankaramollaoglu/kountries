@@ -68,7 +68,7 @@
             android:layout_below="@id/countryRegion"
             android:layout_centerHorizontal="true"
             android:padding="5dp"
-            android:text="@{selectedCountry.setCountryCurrency}"
+            android:text="@{selectedCountry.countryCurrency}"
             android:textSize="16sp" />
 
         <TextView

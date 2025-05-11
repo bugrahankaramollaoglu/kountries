@@ -23,10 +23,8 @@ class CountryFragment : Fragment() {
     private lateinit var viewModel: CountryViewModel
     private var countryUuid = 0
 
-    private var _binding: FragmentCountryBinding? = null
-    private val binding get() = _binding!!
 
-    private lateinit var dataBinding: FragmentCountryBinding
+    private lateinit var binding: FragmentCountryBinding // databinding
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -37,8 +35,7 @@ class CountryFragment : Fragment() {
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        _binding = FragmentCountryBinding.inflate(inflater, container, false)
-//        dataBinding = DataBindingUtil.inflate(inflater, R.layout.fragment_country, container, false)
+        binding = DataBindingUtil.inflate(inflater, R.layout.fragment_country, container, false)
         return binding.root
     }
 
@@ -52,10 +49,6 @@ class CountryFragment : Fragment() {
         viewModel = ViewModelProviders.of(this).get(CountryViewModel::class.java)
         viewModel.getDataFromRoom(countryUuid)
 
-
-
-
-
         observeLiveData()
     }
 
@@ -63,16 +56,23 @@ class CountryFragment : Fragment() {
 
         viewModel.countryLiveData.observe(viewLifecycleOwner, Observer { country ->
             country?.let {
-                binding.countryName.text = country.countryName
-                binding.countryCapital.text = country.countryCapital
-                binding.countryCurrency.text = country.countryCurrency
-                binding.countryLanguage.text = country.countryLanguage
-                binding.countryRegion.text = country.countryRegion
 
-                binding.countryImage.downloadFromUrl(
-                    country.imageUrl,
-                    placeholderProgressBar(requireContext())
-                )
+                binding.selectedCountry = country
+
+                /*
+                    data binding yaptıgın için bunlara gerek kalmadı
+
+                    binding.countryName.text = country.countryName
+                    binding.countryCapital.text = country.countryCapital
+                    binding.countryCurrency.text = country.countryCurrency
+                    binding.countryLanguage.text = country.countryLanguage
+                    binding.countryRegion.text = country.countryRegion
+
+                    binding.countryImage.downloadFromUrl(
+                        country.imageUrl,
+                        placeholderProgressBar(requireContext())
+                    )
+                */
 
                 /*context?.let {
                     binding.countryImage.downloadFromUrl(
@@ -85,11 +85,4 @@ class CountryFragment : Fragment() {
         })
 
     }
-
-
-    override fun onDestroyView() {
-        super.onDestroyView()
-        _binding = null
-    }
-
 }
