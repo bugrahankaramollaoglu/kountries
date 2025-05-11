@@ -5,6 +5,7 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProviders
@@ -25,6 +26,8 @@ class CountryFragment : Fragment() {
     private var _binding: FragmentCountryBinding? = null
     private val binding get() = _binding!!
 
+    private lateinit var dataBinding: FragmentCountryBinding
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
@@ -35,6 +38,7 @@ class CountryFragment : Fragment() {
         savedInstanceState: Bundle?
     ): View? {
         _binding = FragmentCountryBinding.inflate(inflater, container, false)
+//        dataBinding = DataBindingUtil.inflate(inflater, R.layout.fragment_country, container, false)
         return binding.root
     }
 

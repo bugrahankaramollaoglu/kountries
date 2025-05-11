@@ -3,6 +3,15 @@
 <layout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools">
 
+
+    <data>
+
+        <variable
+            name="selectedCountry"
+            type="com.bugrahankaramollaoglu.countries.model.Country" />
+
+    </data>
+
     <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
@@ -11,13 +20,14 @@
 
         <ImageView
             android:id="@+id/countryImage"
-            android:src="@mipmap/ic_launcher_round"
             android:layout_width="match_parent"
-            android:padding="10dp"
             android:layout_height="wrap_content"
             android:layout_alignParentTop="true"
             android:minHeight="200dp"
-            android:scaleType="fitCenter" />
+            android:padding="10dp"
+            android:downloadUrl="@{selectedCountry.imageUrl}"
+            android:scaleType="fitCenter"
+              />
 
         <TextView
             android:id="@+id/countryName"
@@ -26,7 +36,7 @@
             android:layout_below="@id/countryImage"
             android:layout_centerHorizontal="true"
             android:padding="5dp"
-            android:text="Türkiye"
+            android:text="@{selectedCountry.countryName}"
             android:textSize="20sp"
             android:textStyle="bold" />
 
@@ -37,7 +47,7 @@
             android:layout_below="@id/countryName"
             android:layout_centerHorizontal="true"
             android:padding="5dp"
-            android:text="Ankara"
+            android:text="@{selectedCountry.countryCapital}"
             android:textSize="16sp" />
 
 
@@ -48,7 +58,7 @@
             android:layout_below="@id/countryCapital"
             android:layout_centerHorizontal="true"
             android:padding="5dp"
-            android:text="Asia"
+            android:text="@{selectedCountry.countryRegion}"
             android:textSize="16sp" />
 
         <TextView
@@ -58,7 +68,7 @@
             android:layout_below="@id/countryRegion"
             android:layout_centerHorizontal="true"
             android:padding="5dp"
-            android:text="TRY"
+            android:text="@{selectedCountry.setCountryCurrency}"
             android:textSize="16sp" />
 
         <TextView
@@ -68,10 +78,8 @@
             android:layout_below="@id/countryCurrency"
             android:layout_centerHorizontal="true"
             android:padding="5dp"
-            android:text="Türkçe"
+            android:text="@{selectedCountry.countryLanguage}"
             android:textSize="16sp" />
-
-
 
 
     </RelativeLayout>
